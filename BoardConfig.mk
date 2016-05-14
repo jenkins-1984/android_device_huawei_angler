@@ -31,9 +31,23 @@ TARGET_2ND_CPU_VARIANT := cortex-a7
 
 ENABLE_CPUSETS := true
 
-# Inline kernel building
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
+# Rom Toolchain
+TARGET_GCC_VERSION_EXP := 4.9
+
+TARGET_GCC_VERSION_ARM64 := 4.9
+
+# Kernel Toolchain
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9-kernel/bin
 KERNEL_TOOLCHAIN_PREFIX := aarch64-linux-android-
+
+# Uber Optimizations
+export CLANG_O3 := true
+export STRICT_ALIASING := false
+export KRAIT_TUNINGS := false
+export GRAPHITE_OPTS := true
+export ENABLE_GCCONLY := true
+
+# Inline kernel building
 TARGET_KERNEL_SOURCE := kernel/huawei/angler
 TARGET_KERNEL_CONFIG := angler_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
